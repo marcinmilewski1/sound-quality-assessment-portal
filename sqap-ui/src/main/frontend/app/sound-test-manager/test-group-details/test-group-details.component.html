@@ -1,0 +1,180 @@
+<md-card>
+  <md-card-title>{{"TEST_GROUP.NAME" | translate}}: {{testGroup?.name}}</md-card-title>
+  <md-card-content>
+    <md-list>
+      <md-list-item>{{"TEST_GROUP.DESCRIPTION" | translate}}: {{testGroup?.description}}</md-list-item>
+      <md-list-item>{{"TEST_GROUP.RESEARCH_PURPOSE" | translate}}: {{testGroup?.researchPurpose}}</md-list-item>
+      <md-list-item>{{"TEST_GROUP.ESTIMATED_DURATION_TIME" | translate}}: {{testGroup?.estimatedDurationTime}}
+      </md-list-item>
+      <md-list-item>{{"TEST_GROUP.ID" | translate}}: {{testGroup?.id}}</md-list-item>
+      <md-list-item>{{"TEST_GROUP.CREATION_DATE" | translate}}: {{testGroup?.createdDate | date:"dd.MM.yyyy
+        HH:mm"}}
+      </md-list-item>
+      <md-list-item>{{"TEST_GROUP.UPDATED_DATE" | translate}}: {{testGroup?.updatedDate | date:"dd.MM.yyyy
+        HH:mm"}}
+      </md-list-item>
+    </md-list>
+    <md-list *ngIf="tests">
+      <md-card style="margin-bottom: 10px" *ngFor="let test of tests">
+        <md-card-title>{{"TEST.ORDER_NUMBER" | translate}}: {{test.orderNumber}}</md-card-title>
+        <md-card-content>
+          <md-list-item>{{"TEST.NAME" | translate}}: {{test.name}}</md-list-item>
+          <md-list-item>{{"TEST.TYPE" | translate}}: {{test.type}}</md-list-item>
+          <md-list-item>{{"TEST.INSTRUCTION" | translate}}: {{test.description}}</md-list-item>
+          <md-divider></md-divider>
+          <md-tab-group (selectChange)="onTabSelectChangeHandler({index: $event.index, test: test})">
+            <md-tab label="{{'TEST_GROUP_DETAILS.SAMPLES_TAB' | translate}}">
+              <md-list *ngFor="let sample of test.samples">
+                <md-list-item>{{"TEST.SAMPLE.KEY" | translate}}: {{sample.key}}</md-list-item>
+                <md-list-item>{{"TEST.SAMPLE.FILE_NAME" | translate}}: {{sample.fileName}}
+                </md-list-item>
+              </md-list>
+            </md-tab>
+            <md-tab label="{{'TEST_GROUP_DETAILS.RESULTS_TAB' | translate}}">
+              <div *ngIf="test.type === 'ABX'">
+                <md-list>
+                  <md-list-item>{{"TEST.RESULT.ANSWERS" | translate}}:
+                    {{test.formattedResults?.answers}}
+                  </md-list-item>
+                  <md-list-item>{{"TEST.RESULT.CORRECT_ANSWERS" | translate}}:
+                    {{test.formattedResults?.correct_answers}}
+                  </md-list-item>
+                  <md-list-item>{{"TEST.RESULT.CORRECT_ANSWERS_PERCENTAGE" | translate}}:
+                    {{100 * test.formattedResults?.correct_answers/test.formattedResults?.answers
+                    | number:'1.1-2'}}%
+                  </md-list-item>
+                  <md-list-item>{{"TEST.RESULT.BINOMIAL_PROBABILTY_OF_RESULT" | translate}}
+                    B({{test.formattedResults?.answers}}, 0.5):
+                    {{test.formattedResults?.pvalue
+                    | number:'1.1-5'}}
+                  </md-list-item>
+                </md-list>
+
+                <table>
+                  <tr>
+                    <th>{{"TEST.RESULT.PEARSONS_CHI_SQUARE_TEST_VALUE" | translate}} χ<sup>2</sup>
+                    </th>
+                    <th>χ<sup>2</sup> {{"FOR" | translate}} p = 0.05</th>
+                    <th>χ<sup>2</sup> {{"FOR" | translate}} p = 0.01</th>
+                  </tr>
+                  <tr>
+                    <td>{{test.formattedResults?.pearsonsChiSquareValue | number:'1.1-3'}}</td>
+                    <td>{{chiSquareProbabilities[0.05]}}</td>
+                    <td>{{chiSquareProbabilities[0.01]}}</td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <th>{{"TEST.RESULT.SAMPLE" | translate}}</th>
+                    <th>{{"TEST.RESULT.ANSWERS" | translate}}</th>
+                    <th>{{"TEST.RESULT.INCORRECT_ANSWERS" | translate}}</th>
+                    <th>{{"TEST.RESULT.CORRECT_ANSWERS" | translate}}</th>
+                    <th>{{"TEST.RESULT.CORRECT_ANSWERS_PERCENTAGE" | translate}}</th>
+                  </tr>
+                  <tr>
+                    <td>A</td>
+                    <td>{{test.formattedResults?.a_answers}}</td>
+                    <td>{{test.formattedResults?.a_answers -
+                      test.formattedResults?.correct_a_answers}}
+                    </td>
+                    <td>{{test.formattedResults?.correct_a_answers}}</td>
+                    <td>{{100 *
+                      test.formattedResults?.correct_a_answers/test.formattedResults?.a_answers
+                      | number:'1.1-2'}}%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>B</td>
+                    <td>{{test.formattedResults?.b_answers}}</td>
+                    <td>{{test.formattedResults?.b_answers -
+                      test.formattedResults?.correct_b_answers}}
+                    </td>
+                    <td>{{test.formattedResults?.correct_b_answers}}</td>
+                    <td>{{100 *
+                      test.formattedResults?.correct_b_answers/test.formattedResults?.b_answers
+                      | number:'1.1-2'}}%
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div *ngIf="test.type === 'MUSHRA'">
+                <table>
+                  <tr>
+                    <th>{{"TEST.RESULT.SAMPLE" | translate}}</th>
+                    <th>{{"TEST.RESULT.ANSWERS" | translate}}</th>
+                    <th>{{"TEST.RESULT.MEAN" | translate}}</th>
+                    <th>{{"TEST.RESULT.SAMPLE_STANDARD_DEVIATION" | translate}}</th>
+                    <!--<th>{{"TEST.RESULT.POPULATION_STANDARD_DEVIATION" | translate}}</th>-->
+                    <th>{{"TEST.RESULT.CONFIDENCE_INTERVAL_MEAN_95" | translate}}</th>
+                    <th>{{"TEST.RESULT.CONFIDENCE_INTERVAL_MEAN_99" | translate}}</th>
+                  </tr>
+                  <tr *ngFor="let result of test.formattedResults">
+                    <td>{{result.sampleKey}}
+                      <pre *ngIf="result.sampleKey === 'A'">(Hidden reference)</pre>
+                    </td>
+                    <td>{{result.totalAnswers}}</td>
+                    <td>{{result.mean | number:'1.1-2'}}</td>
+                    <td>{{result.sampleStdDeviation | number:'1.1-2'}}</td>
+                    <!--<td>{{result.populationStdDeviation | number:'1.1-2'}}</td>-->
+                    <td>{{result.sampleMean95ConfidenceInterval[0] | number:'1.1-2'}} < m <
+                      {{result.sampleMean95ConfidenceInterval[1] | number:'1.1-2'}}
+                    </td>
+                    <td>{{result.sampleMean99ConfidenceInterval[0] | number:'1.1-2'}} < m <
+                      {{result.sampleMean99ConfidenceInterval[1] | number:'1.1-2'}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </md-tab>
+            <md-tab label="{{'TEST_GROUP_DETAILS.RAW_RESULTS_TAB' | translate}}">
+              <div *ngIf="test.type === 'ABX'">
+                <div *ngIf="!test.exported">
+                  <button md-raised-button (click)="exportResults(test)">Eksportuj do pliku
+                  </button>
+                </div>
+                <div *ngIf="test.exported">
+                  <a [href]="test.jsonUriResults"
+                     download="{{testGroup.name}}_{{test.orderNumber}}-{{test.name}}_results.json">
+                    Pobierz plik w formacie JSON
+                  </a>
+                  <br>
+                  <a [href]="test.csvUriResults"
+                     download="{{testGroup.name}}_{{test.orderNumber}}-{{test.name}}_results.csv">
+                    Pobierz plik w formacie CSV
+                  </a>
+                </div>
+              </div>
+              <div *ngIf="test.type === 'MUSHRA'">
+                <div *ngIf="!test.exported">
+                  <button md-raised-button (click)="exportResults(test)">Eksportuj do pliku
+                  </button>
+                </div>
+                <div *ngIf="test.exported">
+                  <a [href]="test.jsonUriResults"
+                     download="{{testGroup.name}}_{{test.orderNumber}}-{{test.name}}_results.json">
+                    Pobierz plik w formacie JSON
+                  </a>
+                  <br>
+                  <a [href]="test.csvUriResults"
+                     download="{{testGroup.name}}_{{test.orderNumber}}-{{test.name}}_results.csv">
+                    Pobierz plik w formacie CSV
+                  </a>
+                </div>
+              </div>
+            </md-tab>
+          </md-tab-group>
+        </md-card-content>
+      </md-card>
+    </md-list>
+  </md-card-content>
+  <md-card-actions>
+    <button *ngIf="!testGroup?.finished" md-raised-button color="primary" (click)="markAsFinished(testGroup?.id)">
+      {{"TEST_GROUP_DETAILS.MARK_AS_FINISHED" | translate}}
+    </button>
+    <button md-raised-button color="primary" (click)="onDeleteButtonHandler(testGroup?.id)">
+      Usuń
+    </button>
+  </md-card-actions>
+</md-card>
+

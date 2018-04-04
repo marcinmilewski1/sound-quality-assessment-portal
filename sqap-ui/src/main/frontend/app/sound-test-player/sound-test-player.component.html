@@ -1,0 +1,26 @@
+<md-card class="hmax-percentage">
+    <md-card-title>{{"TEST_PLAYER.TITLE" | translate}}</md-card-title>
+
+    <table>
+        <tr>
+            <th>{{"TEST_GROUP.NAME" | translate}}</th>
+            <th>{{"TEST_GROUP.DESCRIPTION" | translate}}</th>
+            <th>{{"TEST_GROUP.RESEARCH_PURPOSE" | translate}}</th>
+            <th>{{"TEST_GROUP.ESTIMATED_DURATION_TIME" | translate}}</th>
+            <th>{{"TEST_GROUP.ID" | translate}}</th>
+            <th>{{"TEST_GROUP.CREATOR" | translate}}</th>
+            <th>{{"TEST_GROUP.CREATION_DATE" | translate}}</th>
+            <th>{{"ACTION" | translate}}</th>
+        </tr>
+        <tr *ngFor="let testGroup of testGroups ">
+            <th>{{testGroup.name}}</th>
+            <th>{{testGroup.description}}</th>
+            <th>{{testGroup.researchPurpose}}</th>
+            <th>{{testGroup.estimatedDurationTime}}</th>
+            <th>{{testGroup.id}}</th>
+            <th>{{testGroup.createdBy}}</th>
+            <th>{{testGroup.createdDate | date:"dd.MM.yyyy HH:mm"}}</th>
+            <th><a [routerLink]="['player/', testGroup.id]" md-raised-button color="primary">{{"TEST_GROUP.PARTICIPATE" | translate}}</a></th>
+        </tr>
+    </table>
+</md-card>

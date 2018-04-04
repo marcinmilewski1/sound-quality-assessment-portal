@@ -1,0 +1,52 @@
+<md-card id="cardsContainer">
+    <md-card-content>
+        <form [formGroup]="localFormGroup">
+            <div class="flex-container" fxLayout="column" fxLayoutAlign="space-around stretch">
+                <md-card class="fx-flex" fxFlex>
+                    <md-card-title>{{"FORMALITIES.TEST_CREATOR_STATEMENT" | translate}}</md-card-title>
+                    <md-card-content>
+                        <pre>{{globalRules?.creatorStatement}}</pre>
+                    </md-card-content>
+                    <md-card-actions>
+                        <md-checkbox formControlName="globalRulesForCreatorAccepted">
+                            {{"FORMALITIES.TEST_CREATOR_STATEMENT_ACCEPT" | translate}}
+                        </md-checkbox>
+                        <div *ngIf="!localFormGroup.get('globalRulesForCreatorAccepted').valid && submitTry"
+                             class="alert alert-danger">
+                            You have to accept this.
+                        </div>
+                    </md-card-actions>
+                </md-card>
+                <br>
+                <md-card class="fx-flex" fxFlex>
+                    <md-card-title>{{"FORMALITIES.CHARACTERISTICS" | translate}}</md-card-title>
+                    <md-card-content>
+                        <div class="flex-container" fxLayout="column" fxLayoutAlign="space-around stretch">
+                            <md-textarea formControlName="purposeOfResearch"
+                                         placeholder="{{'FORMALITIES.RESEARCH_PURPOSE' | translate}}"></md-textarea>
+                            <div *ngIf="!localFormGroup.get('purposeOfResearch').valid && submitTry"
+                                 class="alert alert-danger">
+                                Please provide purpose of the research.
+                            </div>
+                            <md-input min="1" formControlName="durationTime" type="number"
+                                      placeholder="{{'FORMALITIES.DURATION_TIME' | translate}}">
+                            </md-input>
+                            <div *ngIf="!localFormGroup.get('durationTime').valid && submitTry"
+                                 class="alert alert-danger">
+                                Please provide estimated duration time of this test group.
+                            </div>
+                            <md-checkbox formControlName="allowAnonymouse">{{'FORMALITIES.ANONYMOUSE_ALLOWED' |
+                                translate}}
+                            </md-checkbox>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </form>
+    </md-card-content>
+    <md-card-actions>
+        <button md-raised-button type="button" color="primary" [disabled]="!(localFormGroup.valid && globalRules != null)" (click)="submit()">{{"NEXT" | translate}}</button>
+    </md-card-actions>
+</md-card>
+
+

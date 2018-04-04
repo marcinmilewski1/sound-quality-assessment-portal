@@ -1,0 +1,11 @@
+### idea
+.idea/
+*.iml
+run-out.txt
+### sts
+.settings
+.classpath
+.project
+
+target/
+upload-dir

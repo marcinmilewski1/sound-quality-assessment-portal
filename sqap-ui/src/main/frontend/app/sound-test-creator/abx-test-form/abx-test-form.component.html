@@ -1,0 +1,44 @@
+<div [formGroup]="form">
+    <md-input placeholder="{{'ABX_TEST.NAME' | translate}}" type="text" formControlName="name"></md-input>
+    <div *ngIf="!form.get('name').valid && form.get('name').dirty"
+         class="alert alert-danger">
+        Name is required
+    </div>
+    <br>
+    <md-textarea style="width: 100%" placeholder="{{'ABX_TEST.INSTRUCTION' | translate}}"
+                 formControlName="description"></md-textarea>
+    <div *ngIf="!form.get('description').valid && form.get('description').dirty"
+         class="alert alert-danger">
+        Instruction is required
+    </div>
+    <md-input min="1" formControlName="repetitionNumber" type="number"
+              placeholder="{{'MUSHRA_TEST.REPETITION_NUMBER' | translate}}">
+    </md-input>
+    <div *ngFor="let sampleFormGroup of samples.controls; let i = index">
+
+        <input formControlName="orderNumber" value="{{orderNo}}" hidden/>
+
+        <div [formGroup]="sampleFormGroup">
+            <span>{{sampleFormGroup.get('key').value}}</span>
+            <span *ngIf="sampleFormGroup.get('key').value === 'A'"> {{"ABX_TEST.REFERENCE" | translate}}</span><br>
+            <file-upload [id]="sampleFormGroup.get('key').value"
+                         (onSuccessful)="onFileUploadSuccessful($event)"
+                         (onError)="onFileUploadError($event)">
+            </file-upload>
+            <input formControlName="fileDesc" hidden/>
+
+            <div *ngIf="!sampleFormGroup.get('fileDesc').valid && sampleFormGroup.get('fileDesc').dirty">
+                <div *ngIf="sampleFormGroup.get('fileDesc').hasError('required')" class="alert alert-danger"
+                     role="alert">
+                    Required.
+                </div>
+                <div *ngIf="sampleFormGroup.get('fileDesc').hasError('uploadError')" class="alert alert-danger"
+                     role="alert">
+                    File upload goes wrong. Try again.
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

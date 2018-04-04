@@ -1,0 +1,91 @@
+# EMBEDDED SERVER CONFIGURATION
+server:
+    port: ${port:8090}
+
+spring:
+    aop:
+        proxyTargetClass: true
+    http:
+          multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+# EUREKA
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+# ZULL
+zuul:
+  debug:
+    request: true
+  routes:
+    servletPath: /zuul
+    auth-service:
+      sensitiveHeaders:
+      path: /oauth/**
+      stripPrefix: false
+    # ai-service should be moved to path other than /
+    api-service:
+      sensitiveHeaders:
+      path: /api/**
+      stripPrefix: true
+  add-proxy-headers: true
+
+hystrix:
+  command:
+    default:
+      requestLog: enabled
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000000
+
+
+
+ribbon:
+  ReadTimeout: 10000000
+  ConnectTimeout: 10000000
+#SECURITY
+security:
+  basic:
+    enabled: false
+  oauth2:
+    sso:
+      loginPath: /login
+    resource:
+      jwt:
+        keyValue: |
+              -----BEGIN PUBLIC KEY-----
+              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnGp/Q5lh0P8nPL21oMMrt2RrkT9AW5jgYwLfSUnJVc9G6uR3cXRRDCjHqWU5WYwivcF180A6CWp/ireQFFBNowgc5XaA0kPpzEtgsA5YsNX7iSnUibB004iBTfU9hZ2Rbsc8cWqynT0RyN4TP1RYVSeVKvMQk4GT1r7JCEC+TNu1ELmbNwMQyzKjsfBXyIOCFU/E94ktvsTZUHF4Oq44DBylCDsS1k7/sfZC2G5EU7Oz0mhG8+Uz6MSEQHtoIi6mc8u64Rwi3Z3tscuWG2ShtsUFuNSAFNkY7LkLn+/hxLCu2bNISMaESa8dG22CIMuIeRLVcAmEWEWH5EEforTg+QIDAQAB
+              -----END PUBLIC KEY-----
+      id: openid
+      serviceId: ${PREFIX:}resource
+
+# LOGGING
+#logging.level.org.springframework.security: DEBUG
+
+---
+
+spring:
+  profiles: docker
+
+# EUREKA
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8081/eureka/
+
+---
+
+spring:
+  profiles: standalone
+
+# EUREKA
+eureka:
+  instance:
+    hostname: localhost
+    port: 8081
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/

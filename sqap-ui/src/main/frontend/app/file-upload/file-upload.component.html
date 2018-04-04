@@ -1,0 +1,21 @@
+<input type="file"
+       accept=".mp3,audio/*"
+       ngFileSelect
+       [options]="options"
+       (onUpload)="handleUpload($event)"
+       class="inputfile"
+       id="{{templateId}}"
+>
+<label #fileLabel for="{{templateId}}">{{"FILE_UPLOADER.LABEL" | translate}}</label>
+
+<!-- drag & drop file example-->
+<div ngFileDrop
+     [options]="options"
+     (onUpload)="handleUpload($event)"
+     [ngClass]="{'file-over': hasBaseDropZoneOver}"
+     (onFileOver)="fileOverBase($event)">
+</div>
+
+<div>
+    <md-progress-bar mode="determinate" value="{{progress}}"></md-progress-bar>
+</div>

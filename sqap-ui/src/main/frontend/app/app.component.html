@@ -1,0 +1,45 @@
+<md-sidenav-layout fullscreen class="sidenav-layout">
+
+    <md-sidenav #sidenav mode="push">
+        <md-nav-list class="navigation">
+            <template ngFor let-view [ngForOf]="views">
+                <a md-list-item routerLinkActive="active" [routerLink]="view.link" (click)="sidenav.close()"
+                   [hidden]="!authService.canView(view)">
+                    <md-icon md-list-icon>{{view.icon}}</md-icon>
+                    <span md-line>{{view.name}}</span>
+                    <span md-line>{{view.description}}</span>
+                </a>
+            </template>
+        </md-nav-list>
+    </md-sidenav>
+
+    <div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="start stretch">
+
+        <md-toolbar #toolbar color="primary">
+            <button md-icon-button disableRipple="true" (click)="sidenav.open()">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+                </svg>
+            </button>
+            <span>{{ 'APP.NAME' | translate }}</span>
+            <span class="fill"></span>
+            <span class="user-info" *ngIf="authService.isAuthenticated()"> {{'APP.CURRENT_USER' | translate}} {{ authService.getUserData().user_name }}</span>
+            <button md-raised-button color="primary" routerLinkActive="active" [routerLink]="['sign-up']"
+                    [hidden]="authService.isAuthenticated()">{{'APP.SIGN_UP' | translate}}
+            </button>
+            <button md-raised-button color="primary" routerLinkActive="active" [routerLink]="['login']"
+                    [hidden]="authService.isAuthenticated()">{{'APP.LOGIN' | translate}}
+            </button>
+            <button md-raised-button color="primary" (click)="logMeOut()" [hidden]="!authService.isAuthenticated()">
+                {{"APP.LOGOUT" | translate}}
+            </button>
+        </md-toolbar>
+        <div class="flex-item" fxFlex>
+            <router-outlet></router-outlet>
+        </div>
+        <md-progress-bar mode="indeterminate" color="primary" *ngIf="loading"></md-progress-bar>
+        <simple-notifications [options]="options"></simple-notifications>
+    </div>
+
+</md-sidenav-layout>
+

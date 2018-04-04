@@ -1,0 +1,42 @@
+<md-card>
+    <md-card-title>
+        {{"TEST_CREATOR.SINGLE_TEST.TITLE" | translate}} {{id}}
+        <span style="float: right;">
+
+        <span *ngIf="!maximized" (click)="maximize()" class="icon">
+            <md-icon>keyboard_arrow_down</md-icon>
+        </span>
+        <span *ngIf="maximized" (click)="minimize()" class="icon">
+            <md-icon>keyboard_arrow_up</md-icon>
+        </span>
+
+        <span *ngIf="id != 1" class="icon" (click)="onDelete()">
+            <md-icon>clear</md-icon>
+        </span>
+
+        </span>
+    </md-card-title>
+    <md-card-content>
+        <div [hidden]="(!maximized && !submitted) || (!maximized && isValid())">
+            <label for="methodSelect">{{"TEST_CREATOR.SINGLE_TEST.SELECT_TEST_METHOD" | translate}}</label>
+            <select id="methodSelect" #methodSelect (change)="onChange($event)"
+                    class="custom-select app-select-style">
+                <option value="" selected disabled>{{"TEST_CREATOR.SINGLE_TEST.TEST_METHOD" | translate}}</option>
+                <option *ngFor="let testMethod of testMethods" [value]="testMethod.value">
+                    {{testMethod.display}}
+                </option>
+            </select>
+
+
+            <div *ngIf="methodSelect.value === 'ABX'">
+                <abx-test-form [orderNo]="id" [formArray]="testGroup.get('abxTests')"></abx-test-form>
+            </div>
+
+            <div *ngIf="methodSelect.value === 'MUSHRA'">
+            <mushra-test-form [orderNo]="id" [formArray]="testGroup.get('mushraTests')" ></mushra-test-form>
+            </div>
+
+        </div>
+    </md-card-content>
+</md-card>
+

@@ -1,0 +1,15 @@
+7806 [main] WARN  o.s.c.a.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'refreshScope' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+11860 [localhost-startStop-1] WARN  c.n.c.s.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+20533 [main] WARN  c.n.c.s.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+263653 [http-nio-8090-exec-2] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+273372 [http-nio-8090-exec-3] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+273565 [http-nio-8090-exec-4] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+274901 [http-nio-8090-exec-5] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+280884 [http-nio-8090-exec-6] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+280894 [http-nio-8090-exec-7] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+281431 [http-nio-8090-exec-8] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+281499 [http-nio-8090-exec-9] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+281740 [http-nio-8090-exec-4] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+281744 [http-nio-8090-exec-1] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+281738 [http-nio-8090-exec-10] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0
+281761 [http-nio-8090-exec-2] WARN  c.n.z.h.HttpServletRequestWrapper - Content-length different from byte array length! cl=-1, array=0

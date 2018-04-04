@@ -1,0 +1,19 @@
+<!--<md-card class="fx-flex" fxFlex>-->
+    <!--<md-card-title>{{"FORMALITIES.TEST_CREATOR_STATEMENT" | translate}}</md-card-title>-->
+    <!--<md-card-content>-->
+        <!--<pre>{{globalRules?.creatorStatement}}</pre>-->
+    <!--</md-card-content>-->
+<!--</md-card>-->
+
+<md-card class="fx-flex" fxFlex>
+    <md-card-title>{{"FORMALITIES.TEST_PARTICIPANT_STATEMENT" | translate}}</md-card-title>
+    <md-card-content>
+        <pre>{{globalRules?.testerStatement}}</pre>
+    </md-card-content>
+    <md-card-actions *ngIf="toParticipantAccept">
+        <md-checkbox (change)="checkboxChangeEventHandler($event.checked)">
+            {{"FORMALITIES.TEST_PARTICIPANT_STATEMENT_ACCEPT" | translate}}
+        </md-checkbox>
+    </md-card-actions>
+</md-card>
+

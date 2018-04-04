@@ -1,0 +1,13 @@
+<p>
+    Pomyślnie dodano test.<br>
+</p>
+
+Adres dostępu do tej grupy testowej pozwalający na uczestnictwo w teście innym osobom<br>
+<input #url value="{{copyParticipationUrl}}" style="width: 40%;pointer-events: none;
+    tab-index: -1;">
+<button md-raised-button color="primary" [clipboard]="url" (clipboardSuccess)="onSuccess()">Kopiuj</button>
+<!--<pre>{{copyParticipationUrl}}</pre>-->
+<br>
+<a [href]="managerUrl">Przejdź do panelu zarzadzania</a>
+<br>
+<a [href]="participationUrl">Kliknij by uczestniczyć</a>

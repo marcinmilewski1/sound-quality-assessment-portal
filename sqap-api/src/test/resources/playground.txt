@@ -1,0 +1,54 @@
+
+  @Query("select new com.sqap.api.domain.base.SimpleDto(tg.id, tg.name, (tg.description)) from TestGroupEntity tg where tg.owner.id = :id")
+  List<SimpleDto> findDtosByOwnerId(@Param("id") Long id);
+
+  @Query("Select tg.name as name, tg.id as id, tg.description as description, tg.finished as finished, tg.createdDate as createdDate, " +
+              "tg.owner as owner, count(tt.id) as testsNumber" +
+              " from TestGroupEntity tg inner join tg.tests tt")
+      Collection<TestGroupGeneralProjection> findNotParticipated();
+
+
+
+Spock : spring boot test
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration(classes = SqapApiApplication)
+
+datajpatest
+@AutoConfigureDataJpa
+@AutoConfigureTestDatabase
+@AutoConfigureTestEntityManager
+@Transactional
+@ContextConfiguration(classes = SqapApiApplication)
+
+
+
+Zla kolejnosc przy rozwiazywaniu: {owner=user, testsNumber=1, createdDate=1, name=[B@4c140b12, description=testGroup, finished=testdesc, id=false}
+                                   [{owner=user, testsNumber=1, createdDate=1, name=[B@4c140b12, description=testGroup, finished=testdesc, id=false}]
+
+    @Query(value = "SELECT  \n" +
+            "tg.id as id,  \n" +
+            "tg.name as name,  \n" +
+            "tg.description as description,  \n" +
+            "tg.finished as finished,  \n" +
+            "tg.created_date as createdDate,  \n" +
+            "u.username as owner,\n" +
+            "count(tt.id) as testsNumber\n" +
+            "FROM test_groups tg  \n" +
+            "inner join users u on u.id = tg.owner \n" +
+            "inner join audio_tests tt on tt.test_group = tg.id \n" +
+            "WHERE NOT EXISTS(SELECT * \n" +
+            "                 FROM users_participated_tests upt \n" +
+            "                 WHERE upt.test_group_id = tg.id AND upt.user_id = ?1)\n" +
+            "GROUP BY tg.name, tg.id, tg.description, tg.finished, tg.created_date, u.username\n", nativeQuery = true)
+    Collection<TestGroupGeneralProjectionNoSpel> findNotParticipated(Long userId);
+
+
+
+    AOP
+       @SuppressWarnings({"unchecked"})
+        private <T> T getTargetObject(Object proxy) throws Exception {
+            while( (AopUtils.isJdkDynamicProxy(proxy))) {
+                return (T) getTargetObject(((Advised)proxy).getTargetSource().getTarget());
+            }
+            return (T) proxy; // expected to be cglib proxy then, which is simply a specialized class
+        }

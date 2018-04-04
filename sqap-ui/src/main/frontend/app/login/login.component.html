@@ -1,0 +1,14 @@
+<md-card class="hmax-percentage">
+  <md-card-title>Zaloguj się</md-card-title>
+  <md-card-content>
+    <form #loginForm="ngForm">
+      <h1 style="color: red">{{message}}</h1>
+      <md-input placeholder="Login" [(ngModel)]="username" name="username" required></md-input>
+      <md-input type="password" placeholder="Hasło" [(ngModel)]="password" name="password" required></md-input>
+    </form>
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button color="accent" (click)="logMeIn()" [disabled]="!loginForm.form.valid">Zaloguj</button>
+    <!--<button md-raised-button color="primary">Forgot my password</button>-->
+  </md-card-actions>
+</md-card>

@@ -1,0 +1,57 @@
+<md-card class="hmax-pecentage">
+  <md-card-title-group>
+    <md-card-title>Zarejestruj się</md-card-title>
+  </md-card-title-group>
+  <md-card-content>
+
+      <div *ngIf="!signUpForm.controls.password?.valid
+      && signUpForm.controls.password?.dirty && signUpForm.controls.password?.errors.minlength" class="alert alert-danger">
+        Password can't has less than 6 letters.
+      </div>
+
+    <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+      <h1 style="color: red">{{message}}</h1>
+      <md-input placeholder="Nazwa użytkownika" [(ngModel)]="username" name="username" required minlength="6"></md-input>
+      <md-input #password1 id="pw1" type="password" minlength="6" placeholder="Hasło" [(ngModel)]="password" name="password" required></md-input>
+      <md-input #password2 id="pw2" type="password" minlength="6" placeholder="Powtórz hasło" [(ngModel)]="passwordConfirmation" name="password-confirm" required></md-input>
+      <md-input type="email" placeholder="Email" name="email" [(ngModel)]="email" required></md-input>
+
+      <md-card>
+        <md-card-title>Dodatkowe dane wymagane przed przystąpieniem do każdego testu</md-card-title>
+        <md-card-content>
+          <div style="margin-top: 20px;" class="flex-container" fxLayout="column"
+               fxLayoutAlign="space-around stretch">
+            <div class="flex-item" fxFlex>
+              <md-select style="width: 100%" name="isHearingDefect" placeholder="Czy ma Pan/Pani defekt/wadę słuchu ?"
+                         [(ngModel)]="isHearingDefect" required>
+                <md-option value="false">Nie</md-option>
+                <md-option value="true">Tak</md-option>
+              </md-select>
+            </div>
+            <br>
+            <div class="flex-item" fxFlex>
+              <md-select style="width: 100%" name="sex" placeholder="Płeć" [(ngModel)]="sex" required>
+                <md-option [value]="'MALE'">Mężczyzna</md-option>
+                <md-option [value]="'FEMALE'">Kobieta</md-option>
+              </md-select>
+            </div>
+            <br>
+            <div class="flex-item" fxFlex>
+              <md-input style="width: 100%" name="age" type="number" min="1" max="120" placeholder="Wiek (w latach)"
+                        [(ngModel)]="age" required></md-input>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+
+      <md-checkbox #statementCheckbox name="registerStatementConfirmed" [(ngModel)]="registerStatementConfirmed" [checked]="false">{{registerStatement}}</md-checkbox>
+
+      <div>
+        <button md-raised-button color="accent"
+                [disabled]="!(signUpForm.form.valid
+                 && statementCheckbox.checked === true
+                 && password1.value === password2.value)">Zarejestruj</button>
+      </div>
+    </form>
+  </md-card-content>
+</md-card>

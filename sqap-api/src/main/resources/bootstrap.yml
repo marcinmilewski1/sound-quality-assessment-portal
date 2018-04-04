@@ -1,0 +1,35 @@
+# SERVICE VERSION
+info:
+    version: @project.version@
+
+# PROFILES
+spring:
+    application.name: api-service
+    profiles.active: @default.spring.profiles@
+    cloud:
+        config:
+            failFast: true
+---
+
+spring:
+    profiles: docker
+    cloud:
+        config:
+            uri: http://config-service:8888
+
+---
+
+# TODO replace db config to config service
+spring:
+    profiles: standalone
+    cloud:
+        config:
+            uri: http://localhost:8888
+    datasource:
+      url: url
+      username: username
+      password: password
+    jpa:
+      database: postgresql
+      hibernate:
+        ddl-auto: update

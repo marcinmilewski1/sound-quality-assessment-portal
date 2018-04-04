@@ -1,0 +1,64 @@
+<md-card class="hmax-percentage">
+  <md-card-content class="hmax-percentage">
+    <div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="space-around stretch">
+      <div class="flex-item hmax-percentage" fxFlex="60">
+        <div class="flex-container hmax-percentage" fxLayout="row" fxLayoutAlign="space-around stretch">
+          <div class="flex-item hmax-percentage" fxFlex="20">
+            <div class="flex-container hmax-percentage" fxLayout="column"
+                 fxLayoutAlign="space-around stretch">
+              <div class="flex-item" fxFlex="70">
+                <button id='A' class="test-button"
+                        (click)="onSampleSelectToPlay('A')">A
+                </button>
+              </div>
+              <br>
+              <div class="flex-item" fxFlex align="center">
+                <md-radio-button #aRadioButton name="answer" value="A" (click)="onTestAnswer('A')">A
+                </md-radio-button>
+              </div>
+            </div>
+          </div>
+          <div class="flex-item" fxFlex="20">
+            <div class="flex-container hmax-percentage" fxLayout="column"
+                 fxLayoutAlign="space-beetween stretch">
+              <div class="flex-item" fxFlex="70">
+                <button  id='X' class="test-button"
+                         (click)="onSampleSelectToPlay('X')">X
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex-item" fxFlex="20">
+            <div class="flex-container hmax-percentage" fxLayout="column"
+                 fxLayoutAlign="space-around stretch">
+              <div class="flex-item" fxFlex="70">
+                <button id='B' class="test-button"
+                        (click)="onSampleSelectToPlay('B')">B
+                </button>
+              </div>
+              <br>
+              <div class="flex-item" fxFlex align="center">
+                <md-radio-button #bRadioButton name="answer" value="B" (click)="onTestAnswer('B')">B
+                </md-radio-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" fxFlex>
+        <div class="flex-container" fxLayout="row" fxLayoutAlign="space-around stretch">
+          <div class="flex-item hmax-percentage" style="width: 100%">
+            <audio-player [samples]="samples"></audio-player>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" fxFlex align="center">
+            <md-progress-bar *ngIf="submitted" mode="indeterminate" color="primary"></md-progress-bar>
+            <button  *ngIf="!submitted" md-raised-button="submit" color="primary" (click)="onSubmit()"
+                    disabled="{{selectedSample == null}}">{{"SUBMIT" | translate}}
+            </button>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+

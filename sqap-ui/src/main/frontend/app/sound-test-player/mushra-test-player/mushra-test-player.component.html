@@ -1,0 +1,109 @@
+<md-card class="hmax-percentage">
+  <md-card-content class="hmax-percentage">
+    <div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="space-around stretch">
+      <div class="flex-item hmax-percentage" fxFlex="80">
+        <div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="space-between stretch">
+          <div class="flex-item" fxFlex="80">
+            <div class="flex-container hmax-percentage" fxLayout="row" fxLayoutAlign="center stretch">
+
+              <div style="position: relative; height:100%; width: 100%" class="fx-flex">
+
+                <div
+                  style="position: absolute; top:0%; height:16%;display: flex;align-items: center; justify-content: flex-start;">
+                  {{"MUSHRA_TEST_PLAYER.EXCELLENT" | translate}}
+                </div>
+
+                <div
+                  style="position: absolute; top:16%; height:16%; display: flex;align-items: center; justify-content: flex-start;">
+                  {{"MUSHRA_TEST_PLAYER.GOOD" | translate}}
+                </div>
+
+                <div
+                  style="position: absolute; top:32%; height:16%; display: flex;align-items: center; justify-content: flex-start;">
+                  {{"MUSHRA_TEST_PLAYER.FAIR" | translate}}
+                </div>
+
+                <div
+                  style="position: absolute; top:48%; height:16%; display: flex;align-items: center; justify-content: flex-start;">
+                  {{"MUSHRA_TEST_PLAYER.POOR" | translate}}
+                </div>
+
+                <div
+                  style="position: absolute; top:64%; height:16%; display: flex;align-items: center; justify-content: flex-start;">
+                  {{"MUSHRA_TEST_PLAYER.BAD" | translate}}
+                </div>
+
+                <div style="position: absolute; top:0%; right:-1%; height:16%; display: flex;align-items: flex-start;">
+                  100
+                </div>
+                <div style="position: absolute; top:16%; right:-1%; height:16%; display: flex;align-items: flex-start;">
+                  80
+                </div>
+                <div style="position: absolute; top:32%; right:-1%; height:16%; display: flex;align-items: flex-start;">
+                  60
+                </div>
+                <div style="position: absolute; top:48%; right:-1%; height:16%; display: flex;align-items: flex-start;">
+                  40
+                </div>
+                <div style="position: absolute; top:64%; right:-1%; height:16%; display: flex;align-items: flex-start;">
+                  20
+                </div>
+                <div style="position: absolute; top:80%; right:-1%; height:16%; display: flex;align-items: flex-start;">
+                  0
+                </div>
+
+                <div style="position: absolute; top:0%;" class="h-line">
+                </div>
+                <div style="position: absolute; top:16%;" class="h-line">
+                </div>
+                <div style="position: absolute; top:32%;" class="h-line">
+                </div>
+                <div style="position: absolute; top:48%" class="h-line">
+                </div>
+                <div style="position: absolute; top:64%;" class="h-line">
+                </div>
+                <div style="position: absolute; top:80%;" class="h-line">
+                </div>
+
+                <div class="flex-container hmax-percentage" fxLayout="row"
+                     fxLayoutAlign="center stretch">
+                  <template ngFor let-sample [ngForOf]="samplesKeyMap">
+                    <sample-slider class="flex-item hmax-percentage"
+                                   [sampleKey]="sample.currentSampleKey"
+                                   (onChangeEvent)="onSampleSliderChangeHandler($event)"
+                                   [buttonDisabled]="testSamplesDisable"
+                                   (onButtonClick)="onSampleSelectToPlay($event)"></sample-slider>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-item" fxFlex="20" align="center" style="margin-top:15px">
+            <button
+              style="background-color:#08CCCC; height: 50%; width:300px"
+              (click)="onSampleSelectToPlay('REF')"> {{"MUSHRA_TEST_PLAYER.REFERENCE" |
+              translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" fxFlex>
+        <div class="flex-container" fxLayout="row" fxLayoutAlign="space-around stretch">
+          <div class="flex-item hmax-percentage" style="width: 100%">
+            <audio-player [samples]="samples"></audio-player>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" fxFlex align="center">
+        <div *ngIf="submitted">
+          <md-progress-bar mode="indeterminate" color="primary"></md-progress-bar>
+        </div>
+        <div *ngIf="!submitted">
+          <button disabled="{{!isEverySamplesListened}}" md-raised-button="submit" color="primary"
+                  (click)="onSubmit()">{{"SUBMIT" | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>

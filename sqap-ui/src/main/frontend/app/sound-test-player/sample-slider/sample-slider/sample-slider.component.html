@@ -1,0 +1,16 @@
+<div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="space-around stretch"
+     style="text-align: center;">
+    <div class="flex-item hmax-percentage" fxFlex="80">
+
+        <md-slider style="height:100%; margin:0px;" #slider min="0" max="100" step="1" value="0" vertical
+                   tickInterval="1"
+                   disabled="{{_isDisabled}}" (change)="onChange($event)">
+        </md-slider>
+    </div>
+    <div class="flex-item" fxFlex="10">
+        {{slider.value}}
+    </div>
+    <div class="flex-item" fxFlex="10">
+        <button (click)="buttonClick()" style="width: 100px; height: 100%">{{sampleKey}}</button>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+@charset "utf-8";
+
+@import "scss/variables";
+@import "scss/normalize";
+@import "scss/fonts";
+@import "scss/layout";
+@import "scss/bootstrap/scss/bootstrap";
+
+.error-msg {
+  color: red;
+  font-weight:bold;
+}
+
+.row-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.column-flex {
+  display:flex;
+  flex-direction:column;
+}
+
+.md-slider-vertical .md-slider-track {
+  top:0!important;
+  bottom: 0!important;
+}
+

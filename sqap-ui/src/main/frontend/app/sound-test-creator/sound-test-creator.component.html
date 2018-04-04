@@ -1,0 +1,50 @@
+<md-card class="hmax-percentage">
+    <md-card-title>{{"TEST_CREATOR.TITLE" | translate}}</md-card-title>
+    <md-card-content>
+        <div *ngIf="tabIndex === 0">
+            <formalities-form (submitEvent)="formalitiesFormSubmitHandler()"
+                              [rootFormGroup]="testGroupForm"></formalities-form>
+        </div>
+
+        <div *ngIf="tabIndex === 1">
+            <form [formGroup]="testGroupForm" (ngSubmit)="onSubmit(testGroupForm)">
+
+                <div class="column-flex">
+                    <md-input placeholder="{{'TEST_CREATOR.GROUP_NAME' | translate}}" type="text" formControlName="name">
+                    </md-input>
+                    <div *ngIf="!testGroupForm.get('name').valid && testGroupForm.get('name').dirty"
+                         class="alert alert-danger">
+                        Name is required
+                    </div>
+
+                    <md-textarea placeholder="{{'TEST_CREATOR.DESCRIPTION' | translate}}" formControlName="description">
+                    </md-textarea>
+
+                    <md-card>
+                        <md-card-title>{{"TEST_CREATOR.TESTS" | translate}}</md-card-title>
+                        <md-card-content>
+                            <div *ngFor="let test of tests; let i = index">
+                                <single-test [testGroup]="testGroupForm.get('tests')"
+                                             [id]="test.id"
+                                             (onDeleteEvent)="onSingleTestDelete($event)"
+                                             [maximized]="true"
+                                             [submitEvent]="submitEventEmmiter">
+                                </single-test>
+                                <br>
+                            </div>
+
+                        </md-card-content>
+                        <md-card-actions>
+                            <button type="button" md-raised-button color="primary" (click)="addAnotherTest($event)">
+                                {{"TEST_CREATOR.ADD_ANOTHER_TEST" | translate}}
+                            </button>
+                        </md-card-actions>
+                    </md-card>
+                </div>
+                <div align="end">
+                    <button md-raised-button color="accent" type="submit">{{"TEST_CREATOR.SUBMIT" | translate}}</button>
+                </div>
+            </form>
+        </div>
+    </md-card-content>
+</md-card>

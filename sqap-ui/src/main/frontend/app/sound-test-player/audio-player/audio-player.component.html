@@ -1,0 +1,79 @@
+<div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="space-around stretch">
+  <div class="flex-item" fxFlex>
+    <div class="progress">
+      <div #progressBar class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+           aria-valuemax="100"></div>
+    </div>
+    <div #sliderRange style="width: 100%; margin-top: 10px;"></div>
+  </div>
+  <div class="flex-item" fxFlex>
+    <div class="flex-container hmax-percentage" fxLayout="row" fxLayoutAlign="start center">
+
+      <div class="flex-item">
+        <md-icon *ngIf="currentAudioObject && currentAudioObject.audioElement.paused" (click)="resume()">play_arrow
+        </md-icon>
+        <md-icon *ngIf="currentAudioObject == null">stop</md-icon>
+        <md-icon *ngIf="currentAudioObject && !currentAudioObject.audioElement.paused" (click)="pause()">pause</md-icon>
+      </div>
+
+      <div class="flex-item" (click)="toogleMute()">
+        <md-icon *ngIf="!state.muted">volume_up</md-icon>
+        <md-icon *ngIf="state.muted">volume_off</md-icon>
+      </div>
+      <div class="flex-item" fxFlex="10" style="margin-left: 10px">
+        <!--<md-slider value="0.5" min="0" max="1" step="0.01" (change)="onVolumeChange($event.value)"></md-slider>-->
+        <div #volumeRange style="width:100%"></div>
+      </div>
+      <div class="flex-item" fxFlex style="margin-left:20px">
+        <span *ngIf="name">{{"AUDIO_PLAYER.PLAYING" | translate}}: {{name}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="flex-item" fxFlex>
+    <div class="flex-container hmax-percentage" fxLayout="row" fxLayoutAlign="start center">
+      <div class="flex-item" align="center" fxFlex="10">
+        <div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="start stretch"
+             style="border-right: 1px solid black">
+          <div class="flex-item" style="border-bottom: 1px solid black" align="center">
+            Czas
+          </div>
+          <div class="flex-item" #counter>
+            00:00s
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" align="center" fxFlex="10">
+        <div class="flex-container hmax-per centage" fxLayout="column" fxLayoutAlign="start stretch"
+             style="border-right: 1px solid black">
+          <div class="flex-item" style="border-bottom: 1px solid black">
+            Początek
+          </div>
+          <div #startTime class="flex-item">
+            00:00s
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" align="center" fxFlex="10">
+        <div class="flex-container hmax-percentage" fxLayout="column" fxLayoutAlign="start stretch">
+          <div class="flex-item" style="border-bottom: 1px solid black">
+            Koniec
+          </div>
+          <div #endTime class="flex-item">
+            00:00s
+          </div>
+        </div>
+      </div>
+      <div class="flex-item" fxFlex style="margin-left: 20px">
+        <md-slide-toggle checked="{{state.loopback}}" (change)="setLoop($event.checked)" class="flex-item"
+                         color="primary">
+          {{"AUDIO_PLAYER.LOOP" | translate}}
+        </md-slide-toggle>
+      </div>
+      <div class="flex-item" fxFlex>
+        <md-slide-toggle (change)="setSynchronousMode($event.checked)" color="primary"
+                         checked="{{state.synchronousMode}}">{{"AUDIO_PLAYER.SYNCHRONOUS_MODE" | translate}}
+        </md-slide-toggle>
+      </div>
+    </div>
+  </div>
+</div>

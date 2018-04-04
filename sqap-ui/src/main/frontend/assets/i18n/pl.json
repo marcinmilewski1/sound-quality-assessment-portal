@@ -1,0 +1,161 @@
+{
+  "NUMBER": "Numer",
+  "VALUE": "Wartość",
+  "SUBMIT": "Zatwierdź",
+  "OF": "z",
+  "EXIT": "Wyjdź",
+  "NEXT": "Dalej",
+  "FOR": "dla",
+  "HEARING_DEFECT_QUESTION": "Czy ma Pan/Pani defekt/wadę słuchu ?",
+  "SEX": "Płeć",
+  "FEMALE": "Kobieta",
+  "MALE": "Mężczyzna",
+  "AGE": "Wiek",
+  "NO": "Nie",
+  "YES": "Tak",
+  "ACTION":"Akcja",
+  "APP": {
+    "HOME": "Strona domowa",
+    "ABOUT": "O stronie",
+    "NAME": "Internetowy portal do oceny jakości dzwięku",
+    "SIGN_UP": "Zarejestruj się",
+    "LOGIN": "Zaloguj",
+    "CURRENT_USER": "Użytkownik:",
+    "LOGOUT": "Wyloguj"
+  },
+  "HOME": {
+    "HOME": "Strona domowa"
+  },
+  "ABOUT": {
+    "TITLE": "O stronie",
+    "IMPLEMENTED_METHODS": "Zaimplementowane metody testów odsłuchowych",
+    "ABX_TEST": "ABX Test",
+    "ITU-R_BS.1534-3-BASED": "Bazująca na specyfikacji ITU-R BS.1534-3 (MUSHRA)",
+    "CONTACT": "Kontakt"
+  },
+  "ACCESS_DENIED": {
+    "TITLE": "Brak dostępu",
+    "CONTENT": "Nie masz praw dostępu do zawartości tej strony"
+  },
+  "FILE_UPLOADER": {
+    "LABEL": "Wybierz plik"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Brak strony",
+    "CONTENT": "Nie znaleziono podanej strony"
+  },
+  "TEST_CREATOR": {
+    "TITLE": "Kreator testów odsłuchowych",
+    "TESTS": "Testy",
+    "ADD_ANOTHER_TEST": "Dodaj kolejny test",
+    "GROUP_NAME": "Nazwa grupy testowej",
+    "DESCRIPTION": "Opis grupy testowej",
+    "SUBMIT": "Utwórz",
+    "SINGLE_TEST": {
+      "SELECT_TEST_METHOD": "Wybierz metodę testową",
+      "TEST_METHOD": "Metoda testowa",
+      "TITLE": "Test"
+    }
+  },
+  "ABX_TEST": {
+    "NAME": "Nazwa testu",
+    "REFERENCE": "(Próbka referencyjna)",
+    "INSTRUCTION": "Instrukcja dla użytkownika"
+  },
+  "MUSHRA_TEST": {
+    "NAME": "Nazwa testu",
+    "SAMPLES_NUMBER": "Ilość próbek",
+    "REFERENCE": "(Próbka referencyjna)",
+    "INSTRUCTION": "Instrukcja dla użytkownika",
+    "REPETITION_NUMBER": "Ilość powtórzeń"
+  },
+  "FORMALITIES": {
+    "TEST_CREATOR_STATEMENT": "Oświadczenie Twórcy Testów",
+    "TEST_CREATOR_STATEMENT_ACCEPT": "Przeczytałem i w pełni akceptuje Oświadczenie Twórcy Testów",
+    "TEST_PARTICIPANT_STATEMENT": "Oświadczenie Słuchacza",
+    "TEST_PARTICIPANT_STATEMENT_ACCEPT": "Przeczytałem i w pełni akceptuje Oświadczenie Uczestnika Testów",
+    "CHARACTERISTICS": "Charakterystka grupy testowej",
+    "RESEARCH_PURPOSE": "Cel badań",
+    "DURATION_TIME": "Szacunkowy czas trwania (w minutach)",
+    "ANONYMOUSE_ALLOWED": "Zezwól na uczestnictwo w testach anonimowym użytkownikom"
+  },
+  "TEST_PLAYER": {
+    "TITLE": "Testy do uczestnictwa"
+  },
+  "TEST_PLAYER_INTERNAL": {
+    "TITLE": "Zostałeś zaproszony do uczestnictwa w grupie testów odsłuchowych o nazwie",
+    "PARTICIPATION_HINT": "Aby uczestniczyć musisz zaakceptować oświadczenie i odpowiedzieć na pytania pomocnicze, a następnie nacisnąć przycisk 'Dalej'",
+    "PLAY": "Dalej",
+    "SAMPLES_DOWNLOADING": "Pobieranie próbek dźwiękowych. Proszę czekaj.",
+    "FINISHED_MESSAGE": "Dziękuję. Zakończyłeś uczestnictwo w tej grupie testów.",
+    "PRECEDING_QUESTIONS": "Pytania pomocnicze",
+    "PRECEDING_QUESTIONS_SUBTITLE":"Odpowiedź na poniższe pytania  pozwoli na dokładniejszą analizę rezultatów testu."
+  },
+  "MUSHRA_TEST_PLAYER": {
+    "REFERENCE": "Próbka referencyjna",
+    "EXCELLENT": "Doskonała",
+    "GOOD": "Dobra",
+    "FAIR": "Dostateczna",
+    "POOR": "Słaba",
+    "BAD": "Zła"
+  },
+  "TEST_GROUP": {
+    "NAME": "Nazwa grupy",
+    "DESCRIPTION": "Opis grupy",
+    "CREATOR": "Twórca",
+    "CREATION_DATE": "Data utworzenia",
+    "UPDATED_DATE": "Data ostatniej aktualizacji",
+    "TESTS_NUMBER": "Liczba testów w grupie",
+    "ID": "Identyfikator",
+    "PARTICIPATE": "Weź udział",
+    "RESEARCH_PURPOSE": "Cel badań",
+    "ESTIMATED_DURATION_TIME": "Szacunkowy czas trwania (w minutach)"
+  },
+  "TEST": {
+    "NAME": "Nazwa testu",
+    "INSTRUCTION": "Instrukcja",
+    "CREATION_DATE": "Data utworzenia",
+    "UPDATED_DATE": "Data ostatniej aktualizacji",
+    "ORDER_NUMBER": "Numer testu",
+    "TYPE": "Metoda testowa",
+    "SAMPLE": {
+      "KEY": "Próbka",
+      "FILE_NAME": "Pełna nazwa pliku"
+    },
+    "RESULT": {
+      "ANSWERS": "Odpowiedzi",
+      "ANSWER": "Odpowiedź",
+      "CORRECT_ANSWERS": "Prawidłowe odpowiedzi",
+      "INCORRECT_ANSWERS": "Nieprawidłowe odpowiedzi",
+      "SAMPLE": "Próbka",
+      "MEAN": "Średnia",
+      "SAMPLE_STANDARD_DEVIATION": "Odchylenie standardowe próby",
+      "POPULATION_STANDARD_DEVIATION": "Odchylenie standardowe populacji",
+      "BLIND_SAMPLE": "Ślepa próbka",
+      "TESTER": "Tester",
+      "CONFIDENCE_INTERVAL_MEAN_95": "95% przedział ufności dla średniej",
+      "CONFIDENCE_INTERVAL_MEAN_99": "99% przedział ufności dla średniej",
+      "PEARSONS_CHI_SQUARE_TEST_VALUE": "Skumulowana statystyka Pearsona",
+      "CHI_SQUARE_95P": "χ <= ",
+      "CORRECT_ANSWERS_PERCENTAGE": "Procent prawidłowych odpowiedzi",
+      "BINOMIAL_PROBABILTY_OF_RESULT": "Prawdopodobieństwo uzyskania tylu lub więcej prawidłowych odpowiedzi w rozkładzie dwumianowym "
+    }
+  },
+  "TEST_GROUP_DETAILS": {
+    "SAMPLES_TAB": "Próbki",
+    "RESULTS_TAB": "Rezultaty",
+    "RAW_RESULTS_TAB": "Rezultaty niesformatowane",
+    "MARK_AS_FINISHED": "Oznacz jako ukończony"
+  },
+  "TEST_MANAGER": {
+    "TITLE": "Moje testy",
+    "DETAILS": "Szczegóły"
+  },
+  "AUDIO_PLAYER": {
+    "PLAYING": "Odtwarzanie",
+    "SYNCHRONOUS_MODE": "Odtwarzaj synchronicznie",
+    "LOOP": "Automatycznie wznawiaj odtwarzanie"
+  }
+}
+
+

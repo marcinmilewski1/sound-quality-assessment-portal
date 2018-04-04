@@ -1,0 +1,22 @@
+<md-card id="cardsContainer">
+  <md-card-content>
+      <div class="flex-container" fxLayout="column" fxLayoutAlign="space-around stretch">
+        <md-card class="fx-flex" fxFlex>
+          <md-card-title>{{"FORMALITIES.TEST_CREATOR_STATEMENT" | translate}}</md-card-title>
+          <md-card-content>
+            <pre>{{globalRules?.creatorStatement}}</pre>
+          </md-card-content>
+        </md-card>
+
+        <md-card class="fx-flex" fxFlex>
+          <md-card-title>{{"FORMALITIES.TEST_PARTICIPANT_STATEMENT" | translate}}</md-card-title>
+          <md-card-content>
+            <pre>{{globalRules?.testerStatement}}</pre>
+          </md-card-content>
+        </md-card>
+
+      </div>
+  </md-card-content>
+</md-card>
+
+

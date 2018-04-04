@@ -1,0 +1,18 @@
+### idea
+.idea/
+*.iml
+run-out.txt
+### sts
+.settings
+.classpath
+.project
+
+target/
+etc/
+node/
+node_modules/
+coverage/
+src/main/resources/static
+npm-debug.log
+
+

@@ -1,0 +1,103 @@
+<div *ngIf="!isPlayerActivated" class="hmax-percentage">
+  <md-card class="hmax-percentage">
+    <md-card-title>{{"TEST_PLAYER_INTERNAL.TITLE" | translate}}: {{testGroup?.name}}</md-card-title>
+    <md-card-content>
+      <md-list>
+        <md-list-item>{{"TEST_GROUP.DESCRIPTION" | translate}}: {{testGroup?.description}}</md-list-item>
+        <md-list-item>{{"TEST_GROUP.CREATOR" | translate}}: {{testGroup?.createdBy}}</md-list-item>
+        <md-list-item>{{"TEST_GROUP.RESEARCH_PURPOSE" | translate}}: {{testGroup?.researchPurpose}}
+        </md-list-item>
+        <md-list-item>{{"TEST_GROUP.ESTIMATED_DURATION_TIME" | translate}}:
+          {{testGroup?.estimatedDurationTime}}
+        </md-list-item>
+        <md-list-item>{{"TEST_GROUP.ID" | translate}}: {{testGroup?.id}}</md-list-item>
+      </md-list>
+      <md-divider></md-divider>
+      <participant-statement [toParticipantAccept]="true"
+                             (acceptedEvent)="participantStatementAcceptationHandler($event)"></participant-statement>
+      <br>
+      <md-card>
+        <md-card-title>{{"TEST_PLAYER_INTERNAL.PRECEDING_QUESTIONS" | translate}}</md-card-title>
+        <md-card-subtitle>{{"TEST_PLAYER_INTERNAL.PRECEDING_QUESTIONS_SUBTITLE" | translate}}</md-card-subtitle>
+        <md-card-content>
+          <div style="margin-top: 20px;" class="flex-container" fxLayout="column"
+               fxLayoutAlign="space-around stretch">
+            <div class="flex-item" fxFlex>
+              <md-select placeholder="{{'HEARING_DEFECT_QUESTION' | translate}}"
+                         [(ngModel)]="precedingQuestions.isHearingDefect">
+                <md-option value="false">{{"NO" | translate}}</md-option>
+                <md-option value="true">{{"YES" | translate}}</md-option>
+              </md-select>
+            </div>
+            <br>
+            <div class="flex-item" fxFlex>
+              <md-select placeholder="{{'SEX' | translate}}" [(ngModel)]="precedingQuestions.sex">
+                <md-option [value]="'MALE'">{{"MALE" | translate}}</md-option>
+                <md-option [value]="'FEMALE'">{{"FEMALE" | translate}}</md-option>
+              </md-select>
+            </div>
+            <br>
+            <div class="flex-item" fxFlex>
+              <md-input type="number" min="1" max="120" placeholder="{{'AGE' | translate}}"
+                        [(ngModel)]="precedingQuestions.age"></md-input>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+    <md-card-actions>
+      <button md-raised-button color="primary"
+              [disabled]="!(participantStatementAccepted && isPrecedingQuestionsFilled())"
+              (click)="initPlayer()">{{"TEST_PLAYER_INTERNAL.PLAY" | translate}}
+      </button>
+      <p>{{"TEST_PLAYER_INTERNAL.PARTICIPATION_HINT" | translate}}</p>
+      <md-hint></md-hint>
+    </md-card-actions>
+  </md-card>
+</div>
+
+<div *ngIf="isPlayerActivated" style="height: 95%">
+  <div *ngIf="currentTest?.isReady" align="center" style="background-color: white">
+                <span>Test {{currentTest.index + 1}} {{"OF" | translate}} {{tests.length}}
+                    (Próba {{currentTest.value.currentIteration}} {{"OF" | translate}} {{currentTest.value.repetitionsNumber}})
+                </span>
+  </div>
+  <div *ngIf="currentTest?.isReady" style="background-color: white; margin-left: 2%">
+    <b>{{"TEST.INSTRUCTION" | translate}}:</b> {{currentTest.value.description}}
+  </div>
+  <div *ngIf="!currentTest.done" class="hmax-percentage">
+    <div class="hmax-percentage" *ngIf="currentTest?.isReady">
+      <div *ngIf="currentTest.value.type === 'ABX'" class="hmax-percentage">
+        <abx-test-player class="hmax-percentage" [test]="currentTest.value"
+                         (onFinish)="onTestFinish($event)"
+                         [commandEmmiter]="commandEmmiter"
+                         [iteration]="this.currentTest.value.currentIteration">
+        </abx-test-player>
+      </div>
+      <div *ngIf="currentTest.value.type === 'MUSHRA'" class="hmax-percentage">
+        <mushra-test-player class="hmax-percentage" [test]="currentTest.value"
+                            (onFinish)="onTestFinish($event)"
+                            [commandEmmiter]="commandEmmiter"
+                            [iteration]="this.currentTest.value.currentIteration"
+        ></mushra-test-player>
+      </div>
+    </div>
+    <div *ngIf="!currentTest?.isReady">
+      <md-spinner></md-spinner>
+      {{"TEST_PLAYER_INTERNAL.SAMPLES_DOWNLOADING" | translate}}
+    </div>
+  </div>
+
+  <md-card *ngIf="currentTest?.done">
+    <md-card-content>
+      {{"TEST_PLAYER_INTERNAL.FINISHED_MESSAGE" | translate}}
+      <br>
+      Jeśli chcesz podzielić się uwagami, masz własne propozycje lub zauważyłeś błąd proszę o wypełnienie krótkiego
+      formularza.
+    </md-card-content>
+    <md-card-actions>
+      <a md-raised-button color="primary" href="/pooling">Wypełnij formularz</a>
+      <a md-raised-button color="accent" (click)="exit()">Przejdź do strony głównej</a>
+    </md-card-actions>
+  </md-card>
+</div>
